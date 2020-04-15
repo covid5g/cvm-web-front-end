@@ -74,6 +74,23 @@ if (!apiUrl) {
     }
 }
 
+export const fetchDiseaseData = async () => {
+    const response = await axios.get("https://covid19.geo-spatial.org/api/dashboard/getCasesByCounty");
+    return response.data.data;
+};
+
+export const fetchReverseGeo = async (position: MapPosition) => {
+    const apiKey = process.env.REACT_APP_GOOGLE_KEY || '';
+    const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.latitude},${position.longitude}&key=${apiKey}`);
+    for (const result of response.data.results) {
+        for (const addressComponent of result.address_components) {
+            if (addressComponent.types.includes("administrative_area_level_1")) {
+                return addressComponent.short_name;
+            }
+        }
+    }
+    return "NA";
+};
 
 export const authenticateUser = authenticateUserFunction;
 export const fetchMarkers = fetchMarkersFunction;

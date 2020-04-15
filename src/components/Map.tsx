@@ -10,7 +10,7 @@ import {orange, red} from "@material-ui/core/colors";
 import {AppState} from "../store";
 import {connect} from "react-redux";
 import {MapState} from "../reducers/map";
-import {setMapBounds, setMapZoom} from "../actions/map";
+import {setMapBounds, setMapPosition, setMapZoom} from "../actions/map";
 import {fetchMapMarkersThunk} from "../thunks/map";
 import PersonPinIcon from '@material-ui/icons/PersonPin';
 
@@ -58,7 +58,8 @@ const Map = ({map, dispatch}: MapProps) => {
     });
 
     if (map.markersLoaded === false && latitude !== null && longitude !== null && error === null) {
-        dispatch(fetchMapMarkersThunk({latitude, longitude}))
+        dispatch(setMapPosition({latitude, longitude}));
+        dispatch(fetchMapMarkersThunk({latitude, longitude}));
     }
 
     // @ts-ignore

@@ -2,6 +2,7 @@
 import User, {LoginFormUser, RegisterFormUser} from "./User";
 import MapMarker from "./MapMarker";
 import MapPosition from "./MapPosition";
+import {DiseaseData} from "./DiseaseData";
 
 export const SUBMIT_USER_FORM = "SUBMIT_USER_FORM";
 export const FAIL_SUBMIT_USER_FORM = "FAIL_SUBMIT_USER_FORM";
@@ -83,4 +84,32 @@ export type MapTypes =
     | SetMapPosition
     | SetMarkersLoaded
 
+export const SET_DISEASE_DATA = "SET_DISEASE_DATA";
+export const SET_DISEASE_DATA_LOADED = "SET_DISEASE_DATA_LOADED";
 
+export interface SetDiseaseData {
+    type: typeof SET_DISEASE_DATA,
+    data: DiseaseData
+}
+
+export interface SetDiseaseDataLoaded {
+    type: typeof SET_DISEASE_DATA_LOADED,
+}
+
+export const SET_COUNTY = "SET_COUNTY";
+export const SET_COUNTY_LOADED = "SET_COUNTY_LOADED";
+
+export interface SetCounty {
+    type: typeof SET_COUNTY,
+    county: string
+}
+
+export interface SetCountyLoaded {
+    type: typeof SET_COUNTY_LOADED,
+}
+
+export type DataType =
+    | SetDiseaseData
+    | SetDiseaseDataLoaded
+    | SetCounty
+    | SetCountyLoaded

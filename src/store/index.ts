@@ -3,10 +3,12 @@ import usersReducer from "../reducers/users";
 import thunk from "redux-thunk";
 import {createStore, applyMiddleware, compose} from 'redux';
 import mapReducer from "../reducers/map";
+import dataReducer from "../reducers/data";
 
 const rootReducer = combineReducers({
     users: usersReducer,
-    map: mapReducer
+    map: mapReducer,
+    data: dataReducer
 });
 
 // @ts-ignore

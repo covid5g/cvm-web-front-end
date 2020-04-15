@@ -13,6 +13,10 @@ import WarningIcon from '@material-ui/icons/Warning';
 import {green, orange} from "@material-ui/core/colors";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
+import {DataState} from "../../reducers/data";
+import {fetchDiseaseDataThunk, fetchReverseGeoThunk} from "../../thunks/data";
+import MapPosition from "../../types/MapPosition";
+import DiseaseDataWidget from "../DiseaseDataWidget";
 
 // noinspection TypeScriptValidateJSTypes
 const useStyles = makeStyles(theme => ({
@@ -37,9 +41,12 @@ const useStyles = makeStyles(theme => ({
 
 interface LoginFormProps {
     user: User | null,
+    data: DataState,
+    userPosition: MapPosition | null,
+    dispatch: (arg0: any) => void
 }
 
-const Dashboard = ({user}: LoginFormProps) => {
+const Dashboard = ({user, data, userPosition, dispatch}: LoginFormProps) => {
     const classes = useStyles();
     const mapWrapper = useRef<HTMLDivElement | null>(null);
     const [mapHeight, setMapHeight] = useState(500);
@@ -58,6 +65,14 @@ const Dashboard = ({user}: LoginFormProps) => {
 
     if (user === null) {
         return <Redirect to="/login"/>
+    }
+
+    if (data.diseaseDataLoaded === false) {
+        dispatch(fetchDiseaseDataThunk())
+    }
+
+    if (data.countryLoaded === false && userPosition !== null) {
+        dispatch(fetchReverseGeoThunk(userPosition))
     }
 
     let userCheckupData;
@@ -93,10 +108,10 @@ const Dashboard = ({user}: LoginFormProps) => {
 
     return <React.Fragment>
         <Grid item>
-            <Grid container direction={"row"} justify={"space-between"}>
+            <Grid container direction={"row"} justify={"space-between"} alignItems={"center"}>
                 <Grid item>
                     <Paper className={classes.dashboard}>
-                        <Typography> Hello, {user.email} </Typography>
+                        <DiseaseDataWidget/>
                     </Paper>
                 </Grid>
                 <Grid item>
@@ -115,7 +130,9 @@ const Dashboard = ({user}: LoginFormProps) => {
 };
 
 const mapStateToProps = (state: AppState) => ({
-    user: state.users.appUser
+    user: state.users.appUser,
+    data: state.data,
+    userPosition: state.map.userPosition
 });
 
 export default connect(mapStateToProps)(Dashboard);
