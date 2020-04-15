@@ -1,6 +1,7 @@
 export default interface User {
     userId: number
-    email: string,
+    email: string
+    needsCheckup: boolean
 }
 
 export interface LoginFormUser {

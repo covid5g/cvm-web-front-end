@@ -5,12 +5,14 @@
   "dependencies": {
     "@material-ui/core": "^4.5.1",
     "@material-ui/icons": "^4.5.1",
+    "@material-ui/lab": "^4.0.0-alpha.49",
     "@types/jest": "24.0.20",
     "@types/node": "12.11.7",
     "@types/react": "16.9.11",
     "@types/react-dom": "16.9.3",
     "@types/react-router-dom": "^5.1.0",
     "axios": "^0.19.0",
+    "google-map-react": "^1.1.7",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-redux": "^7.1.1",
@@ -18,10 +20,14 @@
     "react-scripts": "^3.4.1",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
-    "typescript": "3.6.4"
+    "supercluster": "^7.0.0",
+    "swr": "^0.1.16",
+    "typescript": "3.6.4",
+    "use-position": "0.0.6",
+    "use-supercluster": "^0.2.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set REACT_APP_GOOGLE_KEY=API_KEY && react-scripts start",
     "start-with-api": "set PORT=3001 && set REACT_APP_API_URL=http://localhost/v1/ && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -43,7 +49,9 @@
     ]
   },
   "devDependencies": {
+    "@types/google-map-react": "^1.1.5",
     "@types/react-redux": "^7.1.5",
+    "@types/use-position": "0.0.0",
     "redux-devtools": "^3.5.0"
   }
 }

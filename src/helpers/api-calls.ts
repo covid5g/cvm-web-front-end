@@ -11,6 +11,12 @@ if (!apiUrl) {
         {
             userId: 1,
             email: "test@test.com",
+            needsCheckup: false
+        },
+        {
+            userId: 2,
+            email: "test2@test.com",
+            needsCheckup: true
         }
     ];
 

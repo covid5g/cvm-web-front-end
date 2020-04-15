@@ -17,14 +17,11 @@ const App: React.FC = () => {
             <Header/>
             <Wrapper>
                 <Switch>
-                    <PrivateRoute path="/dashboard">
-                        <Dashboard/>
-                    </PrivateRoute>
                     <Route path="/login">
                         <LoginForm/>
                     </Route>
                     <PrivateRoute path="/">
-                        <div/>
+                        <Dashboard/>
                     </PrivateRoute>
                 </Switch>
             </Wrapper>
