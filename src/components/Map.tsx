@@ -1,32 +1,32 @@
 import React, {useState, useRef} from "react";
-import useSwr from "swr";
 import GoogleMapReact from "google-map-react";
 import useSupercluster from "use-supercluster";
 import axios from "axios";
 // @ts-ignore
-import {usePosition} from 'use-position';
 import LoadingAnimation from "./LoadingAnimation";
 import "./Map.css"
-
-const fetcher = (url: string) => axios.get(url).then(response => response.data);
+import {usePosition} from "../hooks/usePosition";
 
 // @ts-ignore
 const Marker = ({children, lat, lng}) => children;
 
 export default function Map() {
     const mapRef = useRef();
+    const [crimes, setCrimes] = useState(null);
     const [bounds, setBounds] = useState([] as Array<Number>);
     const [zoom, setZoom] = useState(10);
-    const positionData = usePosition(true, {maximumAge: 0, timeout: 0, enableHighAccuracy: true});
+    const {latitude, longitude} = usePosition(true, {maximumAge: 10000, timeout: Infinity, enableHighAccuracy: false});
+    console.log(latitude, longitude);
 
     const url =
         "https://data.police.uk/api/crimes-street/all-crime?lat=52.629729&lng=-1.131592&date=2019-10";
-    const {data, error} = useSwr(url, {fetcher});
+
+    if (crimes === null) {
+        axios.get(url).then(response => setCrimes(response.data.slice(0, 2000)));
+    }
+
     // @ts-ignore
-    console.log(data);
-    const crimes = data && !error ? data.slice(0, 2000) : [];
-    // @ts-ignore
-    const points = crimes.map(crime => ({
+    const points = crimes !== null ? crimes.map(crime => ({
         type: "Feature",
         properties: {cluster: false, crimeId: crime.id, category: crime.category},
         geometry: {
@@ -36,7 +36,7 @@ export default function Map() {
                 parseFloat(crime.location.latitude)
             ]
         }
-    }));
+    })) : [];
 
     const {clusters, supercluster} = useSupercluster({
         points,
@@ -47,11 +47,11 @@ export default function Map() {
 
     const apiKey = process.env.REACT_APP_GOOGLE_KEY || '';
 
-    if (positionData.latitude && positionData.longitude) {
+    if (crimes && latitude && longitude) {
         return (
             <GoogleMapReact
                 bootstrapURLKeys={{key: apiKey}}
-                defaultCenter={{lat: positionData.latitude, lng: positionData.longitude}}
+                defaultCenter={{lat: latitude, lng: longitude}}
                 defaultZoom={10}
                 yesIWantToUseGoogleMapApiInternals
                 onGoogleApiLoaded={({map}) => {

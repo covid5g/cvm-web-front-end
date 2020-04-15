@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useLayoutEffect, useRef, useState} from "react";
 import {makeStyles} from "@material-ui/core";
 import User from "../types/User";
 import {AppState} from "../store"
@@ -12,6 +12,7 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
 import {green, red} from "@material-ui/core/colors";
 import Paper from "@material-ui/core/Paper";
+import Box from "@material-ui/core/Box";
 
 // noinspection TypeScriptValidateJSTypes
 const useStyles = makeStyles(theme => ({
@@ -20,8 +21,8 @@ const useStyles = makeStyles(theme => ({
         marginBottom: theme.spacing(2),
         padding: theme.spacing(2)
     },
-    mapContainer: {
-        height: 500
+    mapWrapper: {
+        flexGrow: 1
     },
     checkupDoneIcon: {
         color: green.A700,
@@ -36,11 +37,24 @@ const useStyles = makeStyles(theme => ({
 
 interface LoginFormProps {
     user: User | null,
-    dispatch: (arg0: any) => void,
 }
 
-const Dashboard = ({user, dispatch}: LoginFormProps) => {
+const Dashboard = ({user}: LoginFormProps) => {
     const classes = useStyles();
+    const mapWrapper = useRef<HTMLDivElement | null>(null);
+    const [mapHeight, setMapHeight] = useState(500);
+
+    const mapStyle = {
+        height: mapHeight,
+        width: "100%"
+    };
+
+    useLayoutEffect(() => {
+        if (mapWrapper && mapWrapper.current !== null && mapWrapper.current.clientHeight > 500) {
+            // @ts-ignore
+            setMapHeight(mapWrapper.current.clientHeight)
+        }
+    }, []);
 
     if (user === null) {
         return <Redirect to="/login"/>
@@ -92,8 +106,10 @@ const Dashboard = ({user, dispatch}: LoginFormProps) => {
                 </Grid>
             </Grid>
         </Grid>
-        <Grid item className={classes.mapContainer}>
-            <Map/>
+        <Grid item ref={mapWrapper} className={classes.mapWrapper}>
+            <Box style={mapStyle}>
+                <Map/>
+            </Box>
         </Grid>
     </React.Fragment>
 };
