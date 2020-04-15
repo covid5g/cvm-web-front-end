@@ -167,16 +167,13 @@ const Map = ({map, dispatch}: MapProps) => {
                         </Marker>
                     );
                 })}
-                {userMarker !== null &&
-                <Marker
+                {userMarker !== null && <Marker
                     lat={userMarker.geometry.coordinates[1]}
                     lng={userMarker.geometry.coordinates[0]}
                     key={"user-icon"}
                 >
                     <PersonPinIcon className={clsx(classes.mapIcon, classes.mapIconUser)}/>
-                </Marker>
-
-                }
+                </Marker>}
             </GoogleMapReact>
         );
     }

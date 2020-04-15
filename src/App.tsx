@@ -10,21 +10,29 @@ import Wrapper from "./components/Wrapper";
 import PrivateRoute from "./components/PrivateRoute";
 import LoginForm from "./components/LoginForm";
 import Dashboard from "./components/Dashboard";
+import StandaloneMap from "./components/StandaloneMap";
 
 const App: React.FC = () => {
     return <ThemeWrapper>
         <BrowserRouter>
-            <Header/>
-            <Wrapper>
-                <Switch>
-                    <Route path="/login">
-                        <LoginForm/>
-                    </Route>
-                    <PrivateRoute path="/">
-                        <Dashboard/>
-                    </PrivateRoute>
-                </Switch>
-            </Wrapper>
+            <Switch>
+                <Route path="/map">
+                    <StandaloneMap/>
+                </Route>
+                <Route path="/">
+                    <Header/>
+                    <Wrapper>
+                        <Switch>
+                            <Route path="/login">
+                                <LoginForm/>
+                            </Route>
+                            <PrivateRoute path="/">
+                                <Dashboard/>
+                            </PrivateRoute>
+                        </Switch>
+                    </Wrapper>
+                </Route>
+            </Switch>
         </BrowserRouter>
     </ThemeWrapper>
 };
