@@ -54,7 +54,7 @@ export default function usersReducer(state = initialState, action: UserTypes) {
                 ...state,
                 isSubmitting: false,
                 isSuccess: false,
-                message: "Operation failed"
+                message: action.message === null ? "Operation failed" : action.message
             };
         case UPDATE_LOGIN_FORM:
             return {

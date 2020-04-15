@@ -16,7 +16,8 @@ export interface SubmitUserForm {
 }
 
 export interface FailSubmitUserForm {
-    type: typeof FAIL_SUBMIT_USER_FORM
+    type: typeof FAIL_SUBMIT_USER_FORM,
+    message: string | null
 }
 
 export interface SuccessSubmitUserForm {

@@ -12,9 +12,10 @@ export function submitUserForm() {
     }
 }
 
-export function failUserForm() {
+export function failUserForm(message : string|null = null) {
     return {
-        type: FAIL_SUBMIT_USER_FORM
+        type: FAIL_SUBMIT_USER_FORM,
+        message
     }
 }
 

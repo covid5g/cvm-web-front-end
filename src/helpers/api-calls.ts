@@ -8,6 +8,11 @@ const apiUrl = process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL.tri
 let authenticateUserFunction, registerUserFunction;
 let fetchMarkersFunction;
 
+interface ResponseInterface {
+    err: boolean,
+    res: any
+}
+
 if (!apiUrl) {
 
     let users = [
@@ -23,17 +28,17 @@ if (!apiUrl) {
         }
     ];
 
-    authenticateUserFunction = (loginFormUser: LoginFormUser): Promise<User> => {
+    authenticateUserFunction = (loginFormUser: LoginFormUser): Promise<ResponseInterface> => {
         const foundUser = users.find((user: User) => user.email === loginFormUser.email);
         return new Promise((resolve, reject) => setTimeout(() => {
             if (foundUser) {
-                resolve(foundUser)
+                resolve({res: true, err: false})
             }
             reject()
         }, 500))
     };
 
-    registerUserFunction = (registerFormUser: RegisterFormUser): Promise<User> => {
+    registerUserFunction = (registerFormUser: RegisterFormUser): Promise<ResponseInterface> => {
         const foundUser = users.find((user: User) => user.email === registerFormUser.email);
         return new Promise((resolve, reject) => setTimeout(() => {
             if (foundUser) {
@@ -41,7 +46,7 @@ if (!apiUrl) {
             } else {
                 const newUser = {userId: 0, email: registerFormUser.email, needsCheckup: true};
                 users.push(newUser);
-                resolve(newUser)
+                resolve({res: true, err: false})
             }
         }, 500))
     };
@@ -58,14 +63,14 @@ if (!apiUrl) {
     }
 
 } else {
-    authenticateUserFunction = async (user: LoginFormUser): Promise<User> => {
+    authenticateUserFunction = async (user: LoginFormUser): Promise<ResponseInterface> => {
         const response = await axios.post(apiUrl + 'user/login', user);
-        return response.data.user
+        return response.data
     };
 
-    registerUserFunction = async (user: RegisterFormUser): Promise<User> => {
+    registerUserFunction = async (user: RegisterFormUser): Promise<ResponseInterface> => {
         const response = await axios.post(apiUrl + 'user/register', user);
-        return response.data.user
+        return response.data
     };
 
     fetchMarkersFunction = async (position: MapPosition): Promise<Array<MapMarker>> => {

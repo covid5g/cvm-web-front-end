@@ -6,6 +6,7 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ErrorIcon from '@material-ui/icons/Error';
 import {AppState} from "../store";
 import {connect} from "react-redux";
+import clsx from "clsx";
 
 // noinspection TypeScriptValidateJSTypes
 const useStyles = makeStyles(theme => ({
@@ -24,6 +25,9 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         alignItems: 'center',
     },
+    snackbar: {
+        width: "100%"
+    }
 }));
 
 interface UserFormMessageProps {
@@ -36,7 +40,7 @@ const UserFormMessage = ({message, isSuccess}: UserFormMessageProps) => {
     const Icon = isSuccess ? CheckCircleIcon : ErrorIcon;
 
     return <SnackbarContent
-        className={classes[isSuccess ? "success" : "error"]}
+        className={clsx(classes[isSuccess ? "success" : "error"], classes.snackbar)}
         message={
             <span className={classes.message}>
           <Icon className={classes.iconVariant}/>
