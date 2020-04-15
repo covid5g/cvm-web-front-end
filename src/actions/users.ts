@@ -1,9 +1,9 @@
-import User, {LoginFormUser} from "../types/User";
+import User, {LoginFormUser, RegisterFormUser} from "../types/User";
 import {
     FAIL_SUBMIT_USER_FORM,
     LOGIN_USER,
     SUBMIT_USER_FORM,
-    UPDATE_LOGIN_FORM
+    UPDATE_LOGIN_FORM, UPDATE_REGISTER_FORM
 } from "../types/actions";
 
 export function submitUserForm() {
@@ -28,6 +28,13 @@ export function loginUser(user: User) {
 export function updateLoginForm(user: LoginFormUser) {
     return {
         type: UPDATE_LOGIN_FORM,
+        user
+    }
+}
+
+export function updateRegisterForm(user: RegisterFormUser) {
+    return {
+        type: UPDATE_REGISTER_FORM,
         user
     }
 }

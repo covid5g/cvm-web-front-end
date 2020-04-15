@@ -1,11 +1,11 @@
-import User, {LoginFormUser} from "../types/User";
+import User, {LoginFormUser, RegisterFormUser} from "../types/User";
 import axios from "axios";
 import MapMarker from "../types/MapMarker";
 import MapPosition from "../types/MapPosition";
 
 const apiUrl = process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL.trim() : null;
 
-let authenticateUserFunction;
+let authenticateUserFunction, registerUserFunction;
 let fetchMarkersFunction;
 
 if (!apiUrl) {
@@ -33,6 +33,19 @@ if (!apiUrl) {
         }, 500))
     };
 
+    registerUserFunction = (registerFormUser: RegisterFormUser): Promise<User> => {
+        const foundUser = users.find((user: User) => user.email === registerFormUser.email);
+        return new Promise((resolve, reject) => setTimeout(() => {
+            if (foundUser) {
+                reject("User already exists");
+            } else {
+                const newUser = {userId: 0, email: registerFormUser.email, needsCheckup: true};
+                users.push(newUser);
+                resolve(newUser)
+            }
+        }, 500))
+    };
+
     let markers = [
         {latitude: 45.760534, longitude: 21.218452},
         {latitude: 45.757570, longitude: 21.226778}
@@ -50,6 +63,11 @@ if (!apiUrl) {
         return response.data.user
     };
 
+    registerUserFunction = async (user: RegisterFormUser): Promise<User> => {
+        const response = await axios.post(apiUrl + 'user/register', user);
+        return response.data.user
+    };
+
     fetchMarkersFunction = async (position: MapPosition): Promise<Array<MapMarker>> => {
         const response = await axios.post(apiUrl + 'points/get', position);
         return response.data.points
@@ -59,3 +77,4 @@ if (!apiUrl) {
 
 export const authenticateUser = authenticateUserFunction;
 export const fetchMarkers = fetchMarkersFunction;
+export const registerUser = registerUserFunction;

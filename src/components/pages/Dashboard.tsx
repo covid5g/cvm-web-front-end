@@ -1,10 +1,10 @@
 import React, {useLayoutEffect, useRef, useState} from "react";
 import {makeStyles} from "@material-ui/core";
-import User from "../types/User";
-import {AppState} from "../store"
+import User from "../../types/User";
+import {AppState} from "../../store"
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom"
-import Map from "./Map";
+import Map from "../Map";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";

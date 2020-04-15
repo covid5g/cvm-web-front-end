@@ -1,15 +1,15 @@
 import TextField from "@material-ui/core/TextField";
 import React from "react";
 import {makeStyles} from "@material-ui/core";
-import {LoginFormUser} from "../types/User";
+import {RegisterFormUser} from "../types/User";
 import {AppState} from "../store"
 import {connect} from "react-redux";
 import Button from "@material-ui/core/Button";
 import UserFormMessage from "./UserFormMessage";
-import {updateLoginForm} from "../actions/users";
-import {loginUserThunk} from "../thunks/users";
+import {updateRegisterForm} from "../actions/users";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from "@material-ui/core/Grid";
+import {registerUserThunk} from "../thunks/users";
 
 // noinspection TypeScriptValidateJSTypes
 const useStyles = makeStyles(theme => ({
@@ -20,32 +20,39 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-interface LoginFormProps {
+interface RegisterFormProps {
     isSubmitting: boolean,
     message: string,
-    loginForm: LoginFormUser
+    registerForm: RegisterFormUser
     dispatch: (arg0: any) => void,
 }
 
-const LoginForm = ({isSubmitting, message, loginForm, dispatch}: LoginFormProps) => {
+const LoginForm = ({isSubmitting, message, registerForm, dispatch}: RegisterFormProps) => {
     const classes = useStyles();
 
     const updateEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(updateLoginForm({
-            ...loginForm,
+        dispatch(updateRegisterForm({
+            ...registerForm,
             email: event.target.value
         }))
     };
 
     const updatePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(updateLoginForm({
-            ...loginForm,
+        dispatch(updateRegisterForm({
+            ...registerForm,
             password: event.target.value
         }))
     };
 
-    const loginUser = () => {
-        dispatch(loginUserThunk(loginForm))
+    const updatePasswordConfirm = (event: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(updateRegisterForm({
+            ...registerForm,
+            passwordConfirm: event.target.value
+        }))
+    };
+
+    const registerUser = () => {
+        dispatch(registerUserThunk(registerForm))
     };
 
     return <Grid container direction={"row"}>
@@ -67,6 +74,15 @@ const LoginForm = ({isSubmitting, message, loginForm, dispatch}: LoginFormProps)
             type={"password"}
             onChange={updatePassword}
         />
+        <TextField
+            disabled={isSubmitting}
+            className={classes.input}
+            label={"Confirm Password"}
+            fullWidth
+            variant={"outlined"}
+            type={"password"}
+            onChange={updatePasswordConfirm}
+        />
         <Button
             fullWidth
             disabled={isSubmitting}
@@ -74,9 +90,9 @@ const LoginForm = ({isSubmitting, message, loginForm, dispatch}: LoginFormProps)
             variant="contained"
             component="label"
             color={"primary"}
-            onClick={loginUser}
+            onClick={registerUser}
         >
-            {isSubmitting ? <CircularProgress size={24}/> : "Login"}
+            {isSubmitting ? <CircularProgress size={24}/> : "Register"}
         </Button>
     </Grid>
 };
@@ -84,7 +100,7 @@ const LoginForm = ({isSubmitting, message, loginForm, dispatch}: LoginFormProps)
 const mapStateToProps = (state: AppState) => ({
     isSubmitting: state.users.isSubmitting,
     message: state.users.message,
-    loginForm: state.users.loginForm
+    registerForm: state.users.registerForm
 });
 
 export default connect(mapStateToProps)(LoginForm);

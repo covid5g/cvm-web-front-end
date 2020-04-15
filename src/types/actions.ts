@@ -1,5 +1,5 @@
 // @ts-ignore
-import User, {LoginFormUser} from "./User";
+import User, {LoginFormUser, RegisterFormUser} from "./User";
 import MapMarker from "./MapMarker";
 import MapPosition from "./MapPosition";
 
@@ -8,6 +8,7 @@ export const FAIL_SUBMIT_USER_FORM = "FAIL_SUBMIT_USER_FORM";
 export const SUCCESS_SUBMIT_USER_FORM = "SUCCESS_SUBMIT_USER_FORM";
 export const LOGIN_USER = "LOGIN_USER";
 export const UPDATE_LOGIN_FORM = "UPDATE_LOGIN_FORM";
+export const UPDATE_REGISTER_FORM = "UPDATE_REGISTER_FORM";
 
 export interface SubmitUserForm {
     type: typeof SUBMIT_USER_FORM
@@ -31,12 +32,18 @@ export interface UpdateLoginForm {
     user: LoginFormUser
 }
 
+export interface UpdateRegisterForm {
+    type: typeof UPDATE_REGISTER_FORM,
+    user: RegisterFormUser
+}
+
 export type UserTypes =
     | SubmitUserForm
     | SuccessSubmitUserForm
     | FailSubmitUserForm
     | LoginUser
     | UpdateLoginForm
+    | UpdateRegisterForm
 
 
 export const ADD_MAP_MARKERS = "ADD_MAP_MARKERS";

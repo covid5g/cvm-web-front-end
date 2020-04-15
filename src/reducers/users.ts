@@ -1,10 +1,10 @@
-import User, {LoginFormUser} from "../types/User";
+import User, {LoginFormUser, RegisterFormUser} from "../types/User";
 import {
     FAIL_SUBMIT_USER_FORM,
     LOGIN_USER,
     SUBMIT_USER_FORM,
     SUCCESS_SUBMIT_USER_FORM,
-    UPDATE_LOGIN_FORM,
+    UPDATE_LOGIN_FORM, UPDATE_REGISTER_FORM,
     UserTypes
 } from "../types/actions";
 
@@ -14,7 +14,8 @@ export interface UsersState {
     isSuccess: boolean,
     message: string,
     isModalOpen: boolean
-    loginForm: LoginFormUser
+    loginForm: LoginFormUser,
+    registerForm: RegisterFormUser
 }
 
 const initialState: UsersState = {
@@ -26,6 +27,11 @@ const initialState: UsersState = {
     loginForm: {
         email: "",
         password: ""
+    },
+    registerForm: {
+        email: "",
+        password: "",
+        passwordConfirm: ""
     }
 };
 
@@ -54,6 +60,11 @@ export default function usersReducer(state = initialState, action: UserTypes) {
             return {
                 ...state,
                 loginForm: action.user
+            };
+        case UPDATE_REGISTER_FORM:
+            return {
+                ...state,
+                registerForm: action.user
             };
         case LOGIN_USER:
             return {
