@@ -20,12 +20,14 @@ export const usePosition = (watch = false, settings = defaultSettings) => {
         // @ts-ignore
         const onChange = ({coords}) => {
             if (position.latitude !== coords.latitude || position.longitude !== coords.longitude) {
-                console.log("Changes");
                 setPosition({
                     latitude: coords.latitude,
                     longitude: coords.longitude,
                     accuracy: coords.accuracy,
                 });
+            }
+            if (error !== null) {
+                setError(null)
             }
         };
 
@@ -50,7 +52,7 @@ export const usePosition = (watch = false, settings = defaultSettings) => {
 
         // @ts-ignore
         return () => watcher && geo.clearWatch(watcher);
-    }, [position.latitude, position.longitude, settings, watch]);
+    }, [error, position.latitude, position.longitude, settings, watch]);
 
     return {...position, error};
 };

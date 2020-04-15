@@ -9,8 +9,8 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import CancelIcon from '@material-ui/icons/Cancel';
-import {green, red} from "@material-ui/core/colors";
+import WarningIcon from '@material-ui/icons/Warning';
+import {green, orange} from "@material-ui/core/colors";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
         display: "block"
     },
     checkupNotDoneIcon: {
-        color: red.A700,
+        color: orange.A700,
         display: "block"
     }
 }));
@@ -64,7 +64,7 @@ const Dashboard = ({user}: LoginFormProps) => {
     if (user.needsCheckup) {
         userCheckupData = <Grid container alignItems={"center"} spacing={1}>
             <Grid item>
-                <CancelIcon className={classes.checkupNotDoneIcon}/>
+                <WarningIcon className={classes.checkupNotDoneIcon}/>
             </Grid>
             <Grid item>
                 <Typography>

@@ -2,9 +2,11 @@ import {combineReducers} from "redux";
 import usersReducer from "../reducers/users";
 import thunk from "redux-thunk";
 import {createStore, applyMiddleware, compose} from 'redux';
+import mapReducer from "../reducers/map";
 
 const rootReducer = combineReducers({
-    users: usersReducer
+    users: usersReducer,
+    map: mapReducer
 });
 
 // @ts-ignore
