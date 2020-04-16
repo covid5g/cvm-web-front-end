@@ -73,12 +73,19 @@ const Landing = ({user}: LandingProps) => {
                         Disclaimer
                     </Typography>
                     <Typography>
-                        The information contained in COVID5G Application is not intended nor implied to be a substitute for professional medical advice, it is meant to supplement the information that you obtain from your physician or your healthcare provider.
-
+                        The information contained in COVID5G Application is not intended nor implied to be a substitute
+                        for professional medical advice, it is meant to supplement the information that you obtain from
+                        your physician or your healthcare provider.
+                        <br/>
+                        <br/>
                         You assume full responsibility for how you choose to use this information.
-                        Always seek the advice of your physician or other qualified healthcare provider before starting any new treatment or discontinuing an existing treatment. Talk with your healthcare provider about any questions you may have regarding a medical condition.
-
-                        Nothing contained in COVID5G  Application is intended to be used for medical diagnosis or treatment.
+                        Always seek the advice of your physician or other qualified healthcare provider before starting
+                        any new treatment or discontinuing an existing treatment. Talk with your healthcare provider
+                        about any questions you may have regarding a medical condition.
+                        <br/>
+                        <br/>
+                        Nothing contained in COVID5G Application is intended to be used for medical diagnosis or
+                        treatment.
                     </Typography>
                 </CardContent>
             </Card>
