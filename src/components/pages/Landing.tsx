@@ -73,22 +73,12 @@ const Landing = ({user}: LandingProps) => {
                         Disclaimer
                     </Typography>
                     <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pellentesque purus quis nisi
-                        tristique pharetra. Quisque fermentum tristique placerat. Quisque scelerisque dignissim nunc id
-                        malesuada. Vivamus sit amet libero maximus, consectetur massa eget, fermentum enim. Donec sit
-                        amet nunc in augue molestie ornare sed vel nisl. Vivamus hendrerit interdum augue, cursus
-                        fringilla augue porttitor sit amet. Morbi consequat consectetur augue, id maximus urna luctus
-                        at. Fusce mauris ex, posuere sit amet quam in, tristique convallis nunc. Pellentesque molestie
-                        sodales nibh, at varius lorem malesuada imperdiet.
+                        The information contained in COVID5G Application is not intended nor implied to be a substitute for professional medical advice, it is meant to supplement the information that you obtain from your physician or your healthcare provider.
 
-                        Ut aliquet nunc turpis, posuere aliquet elit fermentum at. Vestibulum ut dolor eget elit
-                        lobortis imperdiet. Curabitur a purus eget ante rhoncus molestie in eu odio. Maecenas iaculis
-                        sed arcu id fermentum. Quisque pulvinar commodo lacus eu sagittis. Fusce maximus metus in
-                        condimentum tincidunt. Quisque eget magna et urna condimentum consequat non et lorem. Orci
-                        varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce
-                        consectetur iaculis nunc ac mollis. In viverra mattis ornare. Aliquam rhoncus vestibulum
-                        condimentum. Morbi et leo massa. Morbi nec dolor eu tellus efficitur sollicitudin. Vivamus
-                        aliquet aliquam erat.
+                        You assume full responsibility for how you choose to use this information.
+                        Always seek the advice of your physician or other qualified healthcare provider before starting any new treatment or discontinuing an existing treatment. Talk with your healthcare provider about any questions you may have regarding a medical condition.
+
+                        Nothing contained in COVID5G  Application is intended to be used for medical diagnosis or treatment.
                     </Typography>
                 </CardContent>
             </Card>

@@ -28,7 +28,7 @@
   },
   "scripts": {
     "start": "set REACT_APP_GOOGLE_KEY=AIzaSyCww44XcxEIIuWvwTEGYYWOcepdj82H5oM && react-scripts start",
-    "start-with-api": "set REACT_APP_GOOGLE_KEY=AIzaSyCww44XcxEIIuWvwTEGYYWOcepdj82H5oM && set REACT_APP_API_URL=http://ws.kronick.eu/ && react-scripts start",
+    "start-with-api": "set REACT_APP_GOOGLE_KEY=AIzaSyCww44XcxEIIuWvwTEGYYWOcepdj82H5oM && set REACT_APP_API_URL=http://cvm.ulfsvel.com/ && react-scripts start",
     "build": "set REACT_APP_GOOGLE_KEY=AIzaSyCww44XcxEIIuWvwTEGYYWOcepdj82H5oM && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

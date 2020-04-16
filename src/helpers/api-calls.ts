@@ -55,11 +55,17 @@ if (!apiUrl) {
     };
 
     let markers = [
-        {latitude: 45.760534, longitude: 21.218452},
-        {latitude: 45.757570, longitude: 21.226778},
-        {latitude: 45.434121, longitude: 12.338134},
+        {latitude: 45.760534, longitude: 21.218452, isDanger:true},
+        {latitude: 45.757570, longitude: 21.226770, isDanger:true},
+        {latitude: 45.757555, longitude: 21.226781, isDanger:true},
+        {latitude: 45.757599, longitude: 21.226725, isDanger:true},
+        {latitude: 45.757525, longitude: 21.226710, isDanger:true},
+        {latitude: 45.434121, longitude: 12.338190, isDanger:true},
         {latitude: 45.435024, longitude: 12.336911},
-        {latitude: 45.435239, longitude: 12.340022}
+        {latitude: 45.435239, longitude: 12.340022},
+        {latitude: 45.4932963, longitude: 12.255234},
+        {latitude: 45.4932960, longitude: 12.255235},
+        {latitude: 45.4932968, longitude: 12.255231}
     ] as Array<MapMarker>;
 
     fetchMarkersFunction = (): Promise<Array<MapMarker>> => {
