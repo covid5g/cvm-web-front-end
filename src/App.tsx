@@ -12,6 +12,7 @@ import Dashboard from "./components/pages/Dashboard";
 import StandaloneMap from "./components/pages/StandaloneMap";
 import UserPagesWrapper from "./components/UserPagesWrapper";
 import Landing from "./components/pages/Landing";
+import Checkup from "./components/pages/Checkup";
 
 const App: React.FC = () => {
     return <ThemeWrapper>
@@ -25,11 +26,8 @@ const App: React.FC = () => {
                         <Route path="/user/">
                             <UserPagesWrapper>
                                 <Switch>
-                                    <Route path="/user/login">
-                                        <LoginForm/>
-                                    </Route>
-                                    <Route path="/user/login">
-                                        <LoginForm/>
+                                    <Route path="/user/checkup">
+                                        <Checkup/>
                                     </Route>
                                     <Route path="/user">
                                         <Landing/>

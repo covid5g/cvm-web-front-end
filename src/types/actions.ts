@@ -11,6 +11,7 @@ export const SUCCESS_SUBMIT_USER_FORM = "SUCCESS_SUBMIT_USER_FORM";
 export const LOGIN_USER = "LOGIN_USER";
 export const UPDATE_LOGIN_FORM = "UPDATE_LOGIN_FORM";
 export const UPDATE_REGISTER_FORM = "UPDATE_REGISTER_FORM";
+export const SET_CHECKUP_FIELD = "SET_CHECKUP_FIELD";
 
 export interface SubmitUserForm {
     type: typeof SUBMIT_USER_FORM
@@ -40,6 +41,14 @@ export interface UpdateRegisterForm {
     user: RegisterFormUser
 }
 
+export interface SetCheckupField {
+    type: typeof SET_CHECKUP_FIELD
+    category: string
+    question: string
+    points: number
+    isTrue: boolean
+}
+
 export type UserTypes =
     | SubmitUserForm
     | SuccessSubmitUserForm
@@ -47,6 +56,7 @@ export type UserTypes =
     | LoginUser
     | UpdateLoginForm
     | UpdateRegisterForm
+    | SetCheckupField
 
 
 export const ADD_MAP_MARKERS = "ADD_MAP_MARKERS";

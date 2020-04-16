@@ -1,7 +1,7 @@
 import User, {LoginFormUser, RegisterFormUser} from "../types/User";
 import {
     FAIL_SUBMIT_USER_FORM,
-    LOGIN_USER,
+    LOGIN_USER, SET_CHECKUP_FIELD,
     SUBMIT_USER_FORM,
     SUCCESS_SUBMIT_USER_FORM,
     UPDATE_LOGIN_FORM, UPDATE_REGISTER_FORM,
@@ -16,6 +16,7 @@ export interface UsersState {
     isModalOpen: boolean
     loginForm: LoginFormUser,
     registerForm: RegisterFormUser
+    checkupFields: {}
 }
 
 const initialState: UsersState = {
@@ -32,11 +33,28 @@ const initialState: UsersState = {
         email: "",
         password: "",
         passwordConfirm: ""
-    }
+    },
+    checkupFields: {}
 };
 
 export default function usersReducer(state = initialState, action: UserTypes) {
     switch (action.type) {
+        case SET_CHECKUP_FIELD:
+            // @ts-ignore
+            const currentCategoryValues = state.checkupFields[action.category] ? state.checkupFields[action.category] : {};
+            return {
+                ...state,
+                checkupFields: {
+                    ...state.checkupFields,
+                    [action.category]: {
+                        ...currentCategoryValues,
+                        [action.question]: {
+                            points: action.points,
+                            isTrue: action.isTrue
+                        }
+                    }
+                }
+            };
         case SUBMIT_USER_FORM:
             return {
                 ...state,

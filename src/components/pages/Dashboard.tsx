@@ -3,7 +3,7 @@ import {makeStyles} from "@material-ui/core";
 import User from "../../types/User";
 import {AppState} from "../../store"
 import {connect} from "react-redux";
-import {Redirect} from "react-router-dom"
+import {Link, Redirect} from "react-router-dom"
 import Map from "../Map";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -87,7 +87,7 @@ const Dashboard = ({user, data, userPosition, dispatch}: LoginFormProps) => {
                 </Typography>
             </Grid>
             <Grid item>
-                <Button color={"primary"} variant={"contained"}>
+                <Button color={"primary"} variant={"contained"} component={Link} to={"/user/checkup"}>
                     Do checkup!
                 </Button>
             </Grid>

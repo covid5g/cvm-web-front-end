@@ -108,7 +108,7 @@ const Map = ({map, dispatch}: MapProps) => {
     });
 
     const apiKey = process.env.REACT_APP_GOOGLE_KEY || '';
-
+    //"https://www.google.com/maps/dir/?api=1&travelmode=driving&layer=traffic&destination=[YOUR_LAT],[YOUR_LNG]"
     if (!error && map.markers.length && latitude && longitude) {
         return (
             <GoogleMapReact
