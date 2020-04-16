@@ -20,10 +20,10 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(2)
     },
     cardContent: {
-        height: "100%"
+        //height: "100%"
     },
     fixForWidth: {
-        maxWidth: "100%"
+        //maxWidth: "100%"
     }
 }));
 
@@ -264,15 +264,16 @@ const Checkup = ({user, checkupFields}: LandingProps) => {
                         </Grid>
                         {page === "general" && generalPage}
                         {page === "targeted" && targetPage}
+                        {page === "done" && <Redirect to={"/"}/>}
                     </Grid>
                 </CardContent>
                 <CardActions>
-                    {page === "general" && (<Button onClick={() => {
+                    {page === "general" && (<Button variant={"contained"} onClick={() => {
                         setPage("targeted")
                     }}>
                         Next
                     </Button>)}
-                    {page === "targeted" && (<Button onClick={() => {
+                    {page === "targeted" && (<Button variant={"contained"} onClick={() => {
                         setPage("done")
                     }}>
                         Done
