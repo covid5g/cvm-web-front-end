@@ -186,36 +186,39 @@ const Map = ({map, dispatch}: MapProps) => {
                     <PersonPinIcon className={clsx(classes.mapIcon, classes.mapIconUser)}/>
                 </Marker>}
 
-                {map.hospitals !== null && map.hospitals.map((hospital) => {
+                {map.hospitals !== null && map.hospitals.map((entry) => {
                     return (
                         <Marker
-                            lat={hospital.geometry.location.lat}
-                            lng={hospital.geometry.location.lng}
-                            key={hospital.place_id}
+                            lat={entry.geometry.location.lat}
+                            lng={entry.geometry.location.lng}
+                            key={entry.place_id}
                         >
-                            <LocalHospitalIcon className={clsx(classes.mapIcon, classes.mapIconSafe)}/>
+                            <LocalHospitalIcon
+                                className={clsx(classes.mapIcon, entry.iconStatus === "ok" && classes.mapIconSafe, entry.iconStatus === "some" && classes.mapIconWarning, entry.iconStatus === "crowded" && classes.mapIconDanger)}/>
                         </Marker>
                     );
                 })}
-                {map.stores !== null && map.stores.map((store) => {
+                {map.stores !== null && map.stores.map((entry) => {
                     return (
                         <Marker
-                            lat={store.geometry.location.lat}
-                            lng={store.geometry.location.lng}
-                            key={store.place_id}
+                            lat={entry.geometry.location.lat}
+                            lng={entry.geometry.location.lng}
+                            key={entry.place_id}
                         >
-                            <LocalGroceryStoreIcon className={clsx(classes.mapIcon, classes.mapIconSafe)}/>
+                            <LocalGroceryStoreIcon
+                                className={clsx(classes.mapIcon, entry.iconStatus === "ok" && classes.mapIconSafe, entry.iconStatus === "some" && classes.mapIconWarning, entry.iconStatus === "crowded" && classes.mapIconDanger)}/>
                         </Marker>
                     );
                 })}
-                {map.pharmacies !== null && map.pharmacies.map((pharmacy) => {
+                {map.pharmacies !== null && map.pharmacies.map((entry) => {
                     return (
                         <Marker
-                            lat={pharmacy.geometry.location.lat}
-                            lng={pharmacy.geometry.location.lng}
-                            key={pharmacy.place_id}
+                            lat={entry.geometry.location.lat}
+                            lng={entry.geometry.location.lng}
+                            key={entry.place_id}
                         >
-                            <LocalPharmacyIcon className={clsx(classes.mapIcon, classes.mapIconSafe)}/>
+                            <LocalPharmacyIcon
+                                className={clsx(classes.mapIcon, entry.iconStatus === "ok" && classes.mapIconSafe, entry.iconStatus === "some" && classes.mapIconWarning, entry.iconStatus === "crowded" && classes.mapIconDanger)}/>
                         </Marker>
                     );
                 })}

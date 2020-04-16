@@ -31,3 +31,16 @@ export const registerUserThunk = (registerFormUser: RegisterFormUser) => (dispat
         dispatch(failUserForm())
     });
 };
+
+// export const setCheckupDoneThunk = (score: number) => (dispatch: (arg0: any) => void) => {
+//     dispatch(submitUserForm());
+//     registerUser(registerFormUser).then((response) => {
+//         if (response.err) {
+//             dispatch(failUserForm(response.res))
+//         } else {
+//             dispatch(loginUserThunk(registerFormUser))
+//         }
+//     }).catch(() => {
+//         dispatch(failUserForm())
+//     });
+// };

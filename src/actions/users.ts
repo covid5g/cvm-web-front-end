@@ -49,3 +49,9 @@ export function setCheckupField(category: string, question: string, points: numb
         isTrue
     }
 }
+
+export function setCheckupDone() {
+    return {
+
+    }
+}

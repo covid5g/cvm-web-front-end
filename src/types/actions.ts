@@ -49,6 +49,12 @@ export interface SetCheckupField {
     isTrue: boolean
 }
 
+export const SET_CHECKUP_DONE = "SET_CHECKUP_DONE";
+
+export interface SetCheckupDone {
+    type: typeof SET_CHECKUP_DONE
+}
+
 export type UserTypes =
     | SubmitUserForm
     | SuccessSubmitUserForm
@@ -57,6 +63,7 @@ export type UserTypes =
     | UpdateLoginForm
     | UpdateRegisterForm
     | SetCheckupField
+    | SetCheckupDone
 
 
 export const ADD_MAP_MARKERS = "ADD_MAP_MARKERS";

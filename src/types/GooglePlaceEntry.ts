@@ -10,5 +10,6 @@ export interface Geometry {
 export interface GooglePlaceEntry {
     geometry: Geometry
     name: string,
-    place_id: string
+    place_id: string,
+    iconStatus?: string
 }
