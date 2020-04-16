@@ -6,13 +6,16 @@ import {usePosition} from "../hooks/usePosition";
 import NewReleasesIcon from '@material-ui/icons/NewReleases';
 import clsx from 'clsx';
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import {orange, red} from "@material-ui/core/colors";
+import {green, orange, red} from "@material-ui/core/colors";
 import {AppState} from "../store";
 import {connect} from "react-redux";
 import {MapState} from "../reducers/map";
 import {setMapBounds, setMapPosition, setMapZoom} from "../actions/map";
-import {fetchMapMarkersThunk} from "../thunks/map";
+import {fetchMapMarkersThunk, fetchPlacesThunk} from "../thunks/map";
 import PersonPinIcon from '@material-ui/icons/PersonPin';
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+import LocalGroceryStoreIcon from '@material-ui/icons/LocalGroceryStore';
+import LocalPharmacyIcon from '@material-ui/icons/LocalPharmacy';
 
 // @ts-ignore
 // noinspection JSUnusedLocalSymbols
@@ -31,6 +34,9 @@ const useStyles = makeStyles(theme => ({
         display: "flex",
         justifyContent: "center",
         alignItems: "center"
+    },
+    mapIconSafe: {
+        color: green.A700
     },
     mapIconDanger: {
         color: red.A700,
@@ -60,6 +66,10 @@ const Map = ({map, dispatch}: MapProps) => {
     if (map.markersLoaded === false && latitude !== null && longitude !== null && error === null) {
         dispatch(setMapPosition({latitude, longitude}));
         dispatch(fetchMapMarkersThunk({latitude, longitude}));
+    }
+
+    if (map.placesLoaded === false && latitude !== null && longitude !== null && error === null) {
+        dispatch(fetchPlacesThunk({latitude, longitude}));
     }
 
     // @ts-ignore
@@ -175,6 +185,40 @@ const Map = ({map, dispatch}: MapProps) => {
                 >
                     <PersonPinIcon className={clsx(classes.mapIcon, classes.mapIconUser)}/>
                 </Marker>}
+
+                {map.hospitals !== null && map.hospitals.map((hospital) => {
+                    return (
+                        <Marker
+                            lat={hospital.geometry.location.lat}
+                            lng={hospital.geometry.location.lng}
+                            key={hospital.place_id}
+                        >
+                            <LocalHospitalIcon className={clsx(classes.mapIcon, classes.mapIconSafe)}/>
+                        </Marker>
+                    );
+                })}
+                {map.stores !== null && map.stores.map((store) => {
+                    return (
+                        <Marker
+                            lat={store.geometry.location.lat}
+                            lng={store.geometry.location.lng}
+                            key={store.place_id}
+                        >
+                            <LocalGroceryStoreIcon className={clsx(classes.mapIcon, classes.mapIconSafe)}/>
+                        </Marker>
+                    );
+                })}
+                {map.pharmacies !== null && map.pharmacies.map((pharmacy) => {
+                    return (
+                        <Marker
+                            lat={pharmacy.geometry.location.lat}
+                            lng={pharmacy.geometry.location.lng}
+                            key={pharmacy.place_id}
+                        >
+                            <LocalPharmacyIcon className={clsx(classes.mapIcon, classes.mapIconSafe)}/>
+                        </Marker>
+                    );
+                })}
             </GoogleMapReact>
         );
     }

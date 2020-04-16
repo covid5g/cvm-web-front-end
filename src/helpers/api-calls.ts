@@ -17,12 +17,12 @@ if (!apiUrl) {
 
     let users = [
         {
-            userId: 1,
+            userId: "1",
             email: "test@test.com",
             needsCheckup: false
         },
         {
-            userId: 2,
+            userId: "2",
             email: "test2@test.com",
             needsCheckup: true
         }
@@ -44,7 +44,7 @@ if (!apiUrl) {
             if (foundUser) {
                 reject("User already exists");
             } else {
-                const newUser = {userId: 0, email: registerFormUser.email, needsCheckup: true};
+                const newUser = {userId: "0", email: registerFormUser.email, needsCheckup: true};
                 users.push(newUser);
                 resolve({res: true, err: false})
             }
@@ -95,6 +95,13 @@ export const fetchReverseGeo = async (position: MapPosition) => {
         }
     }
     return "NA";
+};
+
+export const fetchPlace = async (position: MapPosition, placeType: string, radius: number) => {
+    const apiKey = process.env.REACT_APP_GOOGLE_KEY || '';
+    const response = await axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${position.latitude},${position.longitude}&radius=2000&type=${placeType}&key=${apiKey}`);
+    console.log(response.data);
+    return response.data.results;
 };
 
 export const authenticateUser = authenticateUserFunction;

@@ -14,10 +14,11 @@ import LoginForm from "../LoginForm";
 import RegisterForm from "../RegisterForm";
 
 // noinspection TypeScriptValidateJSTypes
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     card: {
         maxWidth: 500,
         width: 500,
+        margin: theme.spacing(2)
     },
     cardContent: {
         height: "100%"
@@ -25,7 +26,7 @@ const useStyles = makeStyles({
     fixForWidth: {
         maxWidth: "100%"
     }
-});
+}));
 
 interface TabPanelProps extends GridProps {
     value: number

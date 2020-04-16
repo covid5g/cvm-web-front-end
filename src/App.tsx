@@ -5,7 +5,6 @@ import {
     Route
 } from "react-router-dom";
 import ThemeWrapper from "./components/ThemeWrapper";
-import Header from "./components/Header";
 import Wrapper from "./components/Wrapper";
 import PrivateRoute from "./components/PrivateRoute";
 import LoginForm from "./components/LoginForm";
@@ -22,7 +21,6 @@ const App: React.FC = () => {
                     <StandaloneMap/>
                 </Route>
                 <Route path="/">
-                    {/*<Header/>*/}
                     <Switch>
                         <Route path="/user/">
                             <UserPagesWrapper>

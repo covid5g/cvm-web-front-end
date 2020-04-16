@@ -12,7 +12,7 @@ export const loginUserThunk = (loginFormUser: LoginFormUser) => (dispatch: (arg0
         if (response.err) {
             dispatch(failUserForm(response.res))
         } else {
-            dispatch(loginUser({email: loginFormUser.email, userId: 0, needsCheckup: true}));
+            dispatch(loginUser({email: response.res.email, userId: response.res.id, needsCheckup: true}));
         }
     }).catch(() => {
         dispatch(failUserForm())
@@ -25,7 +25,7 @@ export const registerUserThunk = (registerFormUser: RegisterFormUser) => (dispat
         if (response.err) {
             dispatch(failUserForm(response.res))
         } else {
-            dispatch(loginUser({email: registerFormUser.email, userId: 0, needsCheckup: true}));
+            dispatch(loginUserThunk(registerFormUser))
         }
     }).catch(() => {
         dispatch(failUserForm())

@@ -3,6 +3,7 @@ import User, {LoginFormUser, RegisterFormUser} from "./User";
 import MapMarker from "./MapMarker";
 import MapPosition from "./MapPosition";
 import {DiseaseData} from "./DiseaseData";
+import {GooglePlaceEntry} from "./GooglePlaceEntry";
 
 export const SUBMIT_USER_FORM = "SUBMIT_USER_FORM";
 export const FAIL_SUBMIT_USER_FORM = "FAIL_SUBMIT_USER_FORM";
@@ -78,12 +79,28 @@ export interface SetMapPosition {
     position: MapPosition
 }
 
+export const SET_PLACES_LOADED = "SET_PLACES_LOADED";
+export const SET_PLACES = "SET_PLACES";
+
+export interface SetPlacesLoaded {
+    type: typeof SET_PLACES_LOADED
+}
+
+export interface SetPlaces {
+    type: typeof SET_PLACES
+    hospitals: Array<GooglePlaceEntry> | null,
+    stores: Array<GooglePlaceEntry> | null,
+    pharmacies: Array<GooglePlaceEntry> | null
+}
+
 export type MapTypes =
     | AddMapMarkers
     | SetMapZoom
     | SetMapBounds
     | SetMapPosition
     | SetMarkersLoaded
+    | SetPlacesLoaded
+    | SetPlaces
 
 export const SET_DISEASE_DATA = "SET_DISEASE_DATA";
 export const SET_DISEASE_DATA_LOADED = "SET_DISEASE_DATA_LOADED";

@@ -1,5 +1,5 @@
 export default interface User {
-    userId: number
+    userId: string
     email: string
     needsCheckup: boolean
 }
