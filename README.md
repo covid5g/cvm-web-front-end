@@ -30,6 +30,56 @@ To get the project up and running run the following command
 npm install
 ```
 
+## Structure
+
+### Routes
+
+Routing is handles by the `BrowserRouter` and the actual routes are defined by `Route` elements places in `Switch` elements
+
+```
+<BrowserRouter>
+    <Switch>
+        <Route path="/map">
+            <StandaloneMap/>
+        </Route>
+        <Route path="/">
+            <Switch>
+                <Route path="/user/">
+                    <UserPagesWrapper>
+                        <Switch>
+                            <Route path="/user/checkup">
+                                <Checkup/>
+                            </Route>
+                            <Route path="/user">
+                                <Landing/>
+                            </Route>
+                        </Switch>
+                    </UserPagesWrapper>
+                </Route>
+                <PrivateRoute path="/">
+                    <Wrapper>
+                        <Dashboard/>
+                    </Wrapper>
+                </PrivateRoute>
+            </Switch>
+        </Route>
+    </Switch>
+</BrowserRouter>
+```
+
+### Pages
+
+All the pages that are render by the router can be found in the `src/components/pages` directory.
+
+### APIs
+
+All the API calls are centralised in the `src/helpers/api-calls.ts` file.
+The file is mostly split in two parts, the first one consists of mocks used for development and the other one of the real API calls.
+
+### Redux
+
+Redux logic is grouped in `actions`, `reducers`, `store` and `thunks`. All have folders in `src`. 
+
 ## Built With
 
 * [TypeScript](https://www.typescriptlang.org/) - A better JavaScript
